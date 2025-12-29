@@ -1,252 +1,242 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px Helvetica; -webkit-text-stroke: #000000}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px Helvetica; -webkit-text-stroke: #000000; min-height: 19.0px}
-    span.s1 {font-kerning: none}
-  </style>
-</head>
-<body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html lang="es"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;head&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;title&gt;Reta Fútbol Party - v2&lt;/title&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;style&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>body { margin: 0; background: linear-gradient(180deg, #228B22, #006400); font-family: 'Arial Black'; color: #FFF; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>canvas { border: 3px solid #FFD700; background: linear-gradient(to bottom, #87CEEB 70%, #90EE90 100%); border-radius: 10px; max-width: 100%; max-height: 100vh; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>#ui { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); text-align: center; z-index: 10; background: rgba(0,0,0,0.7); padding: 15px; border-radius: 15px; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>button { background: linear-gradient(#FF4500, #DC143C); color: white; border: none; padding: 12px 24px; margin: 8px; font-size: 18px; font-weight: bold; border-radius: 25px; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.3); transition: all 0.2s; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>button:hover { transform: scale(1.05); }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>button:active { transform: scale(0.95); }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>input { padding: 12px; margin: 8px; font-size: 18px; border-radius: 10px; border: 2px solid #FFD700; width: 200px; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>#shop { display: none; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.item { background: #4169E1; margin: 5px; padding: 10px; border-radius: 10px; cursor: pointer; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
-<p class="p1"><span class="s1">&lt;body&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;canvas id="game" width="450" height="700"&gt;&lt;/canvas&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="ui"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div id="login"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;h2&gt;⚽ Reta Fútbol Party&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;input id="name" placeholder="Nombre" maxlength="15"&gt;&lt;br&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;input id="retaId" placeholder="ID RetaApp" maxlength="10"&gt;&lt;br&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;button onclick="startGame()"&gt;🚀 Entrar al Mundo&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div id="hub"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;h2 id="playerName"&gt;&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;p&gt;💰 $&lt;span id="money"&gt;0&lt;/span&gt; | 🏆 &lt;span id="trophies"&gt;0&lt;/span&gt;&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;button onclick="goHome()"&gt;🏠 Mi Casa&lt;/button&gt;&lt;br&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;button onclick="startOnline()"&gt;🌐 Partida Online (4 jug.)&lt;/button&gt;&lt;br&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;button onclick="startCPU()"&gt;🤖 VS CPU (1v1)&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div id="home"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;h2&gt;🏠 Tu Casa&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;p id="trophiesList"&gt;¡Gana carreras!&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;h3&gt;🛒 Tienda&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div id="shop"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="item" onclick="buy('cama')"&gt;🛏️ Cama Lujosa - $200&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="item" onclick="buy('tv')"&gt;📺 TV Gigante - $300&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="item" onclick="buy('trofeo')"&gt;🏆 Trofeo Extra - $100&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;button onclick="backHub()"&gt;🔙 Volver&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const canvas = document.getElementById('game');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const ctx = canvas.getContext('2d');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let state = 'login';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let player = { name: '', retaId: '', money: 500, trophies: 0, items: [] }; // Start $</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let game = {<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>level: 1, score: 0, vx: 4, players: [], bots: [], goalieX: 380, gameOver: false, win: false,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>obstacles: [], remateActive: false, shootDir: {x:0,y:0}, shootPower: 0</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>};</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let keys = {}, touch = { startX:0, startY:0, active: false };</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let audioCtx = new (window.AudioContext || window.webkitAudioContext)();</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function playSound(freq, duration) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const osc = audioCtx.createOscillator(); osc.frequency.value = freq; osc.connect(audioCtx.destination); osc.start(); setTimeout(() =&gt; osc.stop(), duration);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>canvas.addEventListener('touchstart', e =&gt; {<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>touch.startX = e.touches[0].clientX - canvas.offsetLeft; touch.startY = e.touches[0].clientY - canvas.offsetTop; touch.active = true;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (state === 'game' &amp;&amp; game.players[0].grounded) { jumpPlayer(0); playSound(800, 100); }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>});</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>canvas.addEventListener('touchend', e =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (touch.active &amp;&amp; state === 'game' &amp;&amp; game.remateActive) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const dx = e.changedTouches[0].clientX - canvas.offsetLeft - touch.startX;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const dy = e.changedTouches[0].clientY - canvas.offsetTop - touch.startY;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>shoot(Math.atan2(dy, dx), Math.hypot(dx, dy)/100);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>touch.active = false;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>});</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>window.addEventListener('keydown', e =&gt; keys[e.key.toLowerCase()] = true);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>window.addEventListener('keyup', e =&gt; keys[e.key.toLowerCase()] = false);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function startGame() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>player.name = document.getElementById('name').value || 'Futbolero';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>player.retaId = document.getElementById('retaId').value || '001';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('playerName').textContent = `${player.name} (${player.retaId})`;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('login').style.display = 'none';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('hub').style.display = 'block';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>updateUI();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>state = 'hub';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function updateUI() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('money').textContent = player.money;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('trophies').textContent = player.trophies;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function goHome() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('hub').style.display = 'none';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('home').style.display = 'block';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('trophiesList').innerHTML = player.trophies ? `🏆 x${player.trophies} Ganados!` : '¡Gana carreras!';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('shop').style.display = 'block';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>state = 'home';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function buy(item) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const prices = {cama:200, tv:300, trofeo:100};</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (player.money &gt;= prices[item]) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>player.money -= prices[item]; player.items.push(item); player.trophies += (item === 'trofeo' ? 1 : 0);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>alert(`¡Comprado ${item}!`); updateUI();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>} else alert('¡Dinero insuficiente!');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function backHub() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('home').style.display = 'none';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('hub').style.display = 'block';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>updateUI(); state = 'hub';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function startGameMode(botsCount) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>resetGame(botsCount);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('ui').style.display = 'none';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>state = 'game';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function startOnline() { startGameMode(3); } // 3 bots</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function startCPU() { startGameMode(1); } // 1 bot</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function resetGame(botsCount) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>game.level = 1; game.score = 0; game.obstacles = []; game.gameOver = false; game.win = false; game.remateActive = false;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>game.players = [{x:60, y:450, vy:0, grounded:true, color:'#FF69B4', isPlayer:true}]; // Player</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>game.bots = [];</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>for (let i=0; i&lt;botsCount; i++) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>game.bots.push({x:60 + i*20, y:450, vy:0, grounded:true, color:`hsl(${200 + i*30},100%,50%)`, aiTimer: Math.random()*100});</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function jumpPlayer(idx) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const p = game.players[idx] || game.bots[idx];</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (p.grounded) { p.vy = -14; p.grounded = false; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function aiBot(i) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const bot = game.bots[i];</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>bot.aiTimer--;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (bot.aiTimer &lt;= 0 || Math.random() &lt; 0.02) { jumpPlayer(game.players.length + i); bot.aiTimer = 60 + Math.random()*60; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function shoot(angle, power) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>power = Math.min(power, 15);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const success = Math.random() &lt; (0.6 + power * 0.03); // Portero mueve</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>playSound(success ? 1000 : 400, 300);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (success) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>game.score += 200 * game.level * (game.players[0].rank || 1);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>player.money += 100 * game.level * (game.players[0].rank || 1);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>player.trophies++;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>alert(`¡GOLAZO! +$${100 * game.level * (game.players[0].rank || 1)} (Rank ${game.players[0].rank || 1})`);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>} else alert('¡Atajada!');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>setTimeout(backHub, 1000);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function update() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (state !== 'game') return;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Player input</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if ((keys[' '] || keys['w'] || keys['arrowup']) &amp;&amp; game.players[0].grounded) { jumpPlayer(0); playSound(800, 100); }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Physics all</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>[...game.players, ...game.bots].forEach((p, i) =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>p.vy += 0.8; p.y += p.vy;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (p.y &gt; 450) { p.y = 450; p.vy = 0; p.grounded = true; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>p.x += 4 + game.level * 0.5;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (i &gt;= game.players.length) aiBot(i - game.players.length); // Bots</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Obstacles</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (Math.random() &lt; 0.03) game.obstacles.push({x: canvas.width, type: ['spike','gap','wall'][Math.floor(Math.random()*3)]});</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>game.obstacles.forEach(o =&gt; o.x -= 5); game.obstacles = game.obstacles.filter(o =&gt; o.x &gt; -50);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Collisions</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>[...game.players, ...game.bots].forEach(p =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>game.obstacles.forEach(o =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>if (p.x &gt; o.x - 40 &amp;&amp; p.x &lt; o.x + 40 &amp;&amp; p.y &gt; 430) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>p.x = -100; // Elimina</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>});</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Remate trigger (first to reach)</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const leaders = [...game.players, ...game.bots].filter(p =&gt; p.x &gt; 350);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (leaders.length &gt; 0 &amp;&amp; !game.remateActive) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>game.remateActive = true;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>leaders.forEach(p =&gt; p.rank = leaders.findIndex(l =&gt; l === p) + 1);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>game.players[0].rank = game.players[0].rank || 99; // Player rank</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (game.players[0].x &lt; 0) { alert('¡Eliminado!'); backHub(); }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (game.score &gt; 300) game.level++;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function draw() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>ctx.clearRect(0,0,canvas.width,canvas.height);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Ground</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>ctx.fillStyle = '#228B22'; ctx.fillRect(0,470,canvas.width,230);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Obstacles</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>game.obstacles.forEach(o =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>ctx.fillStyle = o.type === 'spike' ? '#8B4513' : o.type === 'gap' ? 'transparent' : '#654321';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>ctx.fillRect(o.x, o.type === 'gap' ? 500 : 440, 40, o.type === 'gap' ? -30 : 40);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Players/Bots (huevos futboleros)</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>[...game.players, ...game.bots].forEach(p =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (p.x &gt; -50) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>ctx.fillStyle = p.color; ctx.beginPath(); ctx.arc(p.x, p.y-20, 25, 0, Math.PI*2); ctx.fill(); // Cuerpo</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>ctx.fillStyle = '#000'; ctx.font = '12px Arial'; ctx.fillText(p.rank || '', p.x-5, p.y-25); // Rank</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>// Balón dribble</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>ctx.save(); ctx.translate(p.x, p.y+10); ctx.rotate(Date.now()/500 + p.x/100); ctx.fillStyle='#FFF'; ctx.beginPath(); ctx.arc(0,0,8,0,Math.PI*2); ctx.fill(); ctx.strokeStyle='#000'; ctx.lineWidth=2; ctx.stroke(); ctx.restore();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Portería + Portero</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>ctx.strokeStyle = '#FFF'; ctx.lineWidth=6; ctx.strokeRect(360,360,70,110);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>ctx.fillStyle = '#00F'; ctx.fillRect(game.goalieX + Math.sin(Date.now()/200)*10, 400, 25, 70); // Mueve</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Remate UI</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (game.remateActive) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>ctx.fillStyle = 'rgba(255,255,0,0.8)'; ctx.font = 'bold 24px Arial'; ctx.fillText('¡REMATA! Swipe/Drag', 100, 200);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (game.players[0].rank === 1) ctx.fillText('¡PRIMER LUGAR!', 120, 250);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// HUD</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>ctx.fillStyle = '#000'; ctx.font = 'bold 22px Arial';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>ctx.fillText(`Nivel ${game.level} | $${game.score}`, 20, 40);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>ctx.fillText(`Bots: ${game.bots.length} | Rank: ${game.players[0].rank || '?' }`, 20, 70);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function gameLoop() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>update(); draw(); requestAnimationFrame(gameLoop);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function backHub() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('ui').style.display = 'block';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('hub').style.display = 'block';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>updateUI(); resetGame(0); state = 'hub';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>gameLoop();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
-</body>
-</html>
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!DOCTYPE html>\
+<html lang="es">\
+<head>\
+    <meta charset="UTF-8">\
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
+    <title>Reta F\'fatbol Party - v2</title>\
+    <style>\
+        body \{ margin: 0; background: linear-gradient(180deg, #228B22, #006400); font-family: 'Arial Black'; color: #FFF; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; \}\
+        canvas \{ border: 3px solid #FFD700; background: linear-gradient(to bottom, #87CEEB 70%, #90EE90 100%); border-radius: 10px; max-width: 100%; max-height: 100vh; \}\
+        #ui \{ position: absolute; top: 10px; left: 50%; transform: translateX(-50%); text-align: center; z-index: 10; background: rgba(0,0,0,0.7); padding: 15px; border-radius: 15px; \}\
+        button \{ background: linear-gradient(#FF4500, #DC143C); color: white; border: none; padding: 12px 24px; margin: 8px; font-size: 18px; font-weight: bold; border-radius: 25px; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.3); transition: all 0.2s; \}\
+        button:hover \{ transform: scale(1.05); \}\
+        button:active \{ transform: scale(0.95); \}\
+        input \{ padding: 12px; margin: 8px; font-size: 18px; border-radius: 10px; border: 2px solid #FFD700; width: 200px; \}\
+        #shop \{ display: none; \}\
+        .item \{ background: #4169E1; margin: 5px; padding: 10px; border-radius: 10px; cursor: pointer; \}\
+    </style>\
+</head>\
+<body>\
+    <canvas id="game" width="450" height="700"></canvas>\
+    <div id="ui">\
+        <div id="login">\
+            <h2>\uc0\u9917  Reta F\'fatbol Party</h2>\
+            <input id="name" placeholder="Nombre" maxlength="15"><br>\
+            <input id="retaId" placeholder="ID RetaApp" maxlength="10"><br>\
+            <button onclick="startGame()">\uc0\u55357 \u56960  Entrar al Mundo</button>\
+        </div>\
+        <div id="hub">\
+            <h2 id="playerName"></h2>\
+            <p>\uc0\u55357 \u56496  $<span id="money">0</span> | \u55356 \u57286  <span id="trophies">0</span></p>\
+            <button onclick="goHome()">\uc0\u55356 \u57312  Mi Casa</button><br>\
+            <button onclick="startOnline()">\uc0\u55356 \u57104  Partida Online (4 jug.)</button><br>\
+            <button onclick="startCPU()">\uc0\u55358 \u56598  VS CPU (1v1)</button>\
+        </div>\
+        <div id="home">\
+            <h2>\uc0\u55356 \u57312  Tu Casa</h2>\
+            <p id="trophiesList">\'a1Gana carreras!</p>\
+            <h3>\uc0\u55357 \u57042  Tienda</h3>\
+            <div id="shop">\
+                <div class="item" onclick="buy('cama')">\uc0\u55357 \u57039 \u65039  Cama Lujosa - $200</div>\
+                <div class="item" onclick="buy('tv')">\uc0\u55357 \u56570  TV Gigante - $300</div>\
+                <div class="item" onclick="buy('trofeo')">\uc0\u55356 \u57286  Trofeo Extra - $100</div>\
+            </div>\
+            <button onclick="backHub()">\uc0\u55357 \u56601  Volver</button>\
+        </div>\
+    </div>\
+    <script>\
+        const canvas = document.getElementById('game');\
+        const ctx = canvas.getContext('2d');\
+        let state = 'login';\
+        let player = \{ name: '', retaId: '', money: 500, trophies: 0, items: [] \}; // Start $\
+        let game = \{ \
+            level: 1, score: 0, vx: 4, players: [], bots: [], goalieX: 380, gameOver: false, win: false,\
+            obstacles: [], remateActive: false, shootDir: \{x:0,y:0\}, shootPower: 0\
+        \};\
+        let keys = \{\}, touch = \{ startX:0, startY:0, active: false \};\
+        let audioCtx = new (window.AudioContext || window.webkitAudioContext)();\
+\
+        function playSound(freq, duration) \{\
+            const osc = audioCtx.createOscillator(); osc.frequency.value = freq; osc.connect(audioCtx.destination); osc.start(); setTimeout(() => osc.stop(), duration);\
+        \}\
+\
+        canvas.addEventListener('touchstart', e => \{ \
+            touch.startX = e.touches[0].clientX - canvas.offsetLeft; touch.startY = e.touches[0].clientY - canvas.offsetTop; touch.active = true;\
+            if (state === 'game' && game.players[0].grounded) \{ jumpPlayer(0); playSound(800, 100); \}\
+        \});\
+        canvas.addEventListener('touchend', e => \{\
+            if (touch.active && state === 'game' && game.remateActive) \{\
+                const dx = e.changedTouches[0].clientX - canvas.offsetLeft - touch.startX;\
+                const dy = e.changedTouches[0].clientY - canvas.offsetTop - touch.startY;\
+                shoot(Math.atan2(dy, dx), Math.hypot(dx, dy)/100);\
+            \}\
+            touch.active = false;\
+        \});\
+        window.addEventListener('keydown', e => keys[e.key.toLowerCase()] = true);\
+        window.addEventListener('keyup', e => keys[e.key.toLowerCase()] = false);\
+\
+        function startGame() \{\
+            player.name = document.getElementById('name').value || 'Futbolero';\
+            player.retaId = document.getElementById('retaId').value || '001';\
+            document.getElementById('playerName').textContent = `$\{player.name\} ($\{player.retaId\})`;\
+            document.getElementById('login').style.display = 'none';\
+            document.getElementById('hub').style.display = 'block';\
+            updateUI();\
+            state = 'hub';\
+        \}\
+\
+        function updateUI() \{\
+            document.getElementById('money').textContent = player.money;\
+            document.getElementById('trophies').textContent = player.trophies;\
+        \}\
+\
+        function goHome() \{\
+            document.getElementById('hub').style.display = 'none';\
+            document.getElementById('home').style.display = 'block';\
+            document.getElementById('trophiesList').innerHTML = player.trophies ? `\uc0\u55356 \u57286  x$\{player.trophies\} Ganados!` : '\'a1Gana carreras!';\
+            document.getElementById('shop').style.display = 'block';\
+            state = 'home';\
+        \}\
+\
+        function buy(item) \{\
+            const prices = \{cama:200, tv:300, trofeo:100\};\
+            if (player.money >= prices[item]) \{\
+                player.money -= prices[item]; player.items.push(item); player.trophies += (item === 'trofeo' ? 1 : 0);\
+                alert(`\'a1Comprado $\{item\}!`); updateUI();\
+            \} else alert('\'a1Dinero insuficiente!');\
+        \}\
+\
+        function backHub() \{\
+            document.getElementById('home').style.display = 'none';\
+            document.getElementById('hub').style.display = 'block';\
+            updateUI(); state = 'hub';\
+        \}\
+\
+        function startGameMode(botsCount) \{\
+            resetGame(botsCount);\
+            document.getElementById('ui').style.display = 'none';\
+            state = 'game';\
+        \}\
+\
+        function startOnline() \{ startGameMode(3); \} // 3 bots\
+        function startCPU() \{ startGameMode(1); \} // 1 bot\
+\
+        function resetGame(botsCount) \{\
+            game.level = 1; game.score = 0; game.obstacles = []; game.gameOver = false; game.win = false; game.remateActive = false;\
+            game.players = [\{x:60, y:450, vy:0, grounded:true, color:'#FF69B4', isPlayer:true\}]; // Player\
+            game.bots = [];\
+            for (let i=0; i<botsCount; i++) \{\
+                game.bots.push(\{x:60 + i*20, y:450, vy:0, grounded:true, color:`hsl($\{200 + i*30\},100%,50%)`, aiTimer: Math.random()*100\});\
+            \}\
+        \}\
+\
+        function jumpPlayer(idx) \{\
+            const p = game.players[idx] || game.bots[idx];\
+            if (p.grounded) \{ p.vy = -14; p.grounded = false; \}\
+        \}\
+\
+        function aiBot(i) \{\
+            const bot = game.bots[i];\
+            bot.aiTimer--;\
+            if (bot.aiTimer <= 0 || Math.random() < 0.02) \{ jumpPlayer(game.players.length + i); bot.aiTimer = 60 + Math.random()*60; \}\
+        \}\
+\
+        function shoot(angle, power) \{\
+            power = Math.min(power, 15);\
+            const success = Math.random() < (0.6 + power * 0.03); // Portero mueve\
+            playSound(success ? 1000 : 400, 300);\
+            if (success) \{\
+                game.score += 200 * game.level * (game.players[0].rank || 1);\
+                player.money += 100 * game.level * (game.players[0].rank || 1);\
+                player.trophies++;\
+                alert(`\'a1GOLAZO! +$$\{100 * game.level * (game.players[0].rank || 1)\} (Rank $\{game.players[0].rank || 1\})`);\
+            \} else alert('\'a1Atajada!');\
+            setTimeout(backHub, 1000);\
+        \}\
+\
+        function update() \{\
+            if (state !== 'game') return;\
+            // Player input\
+            if ((keys[' '] || keys['w'] || keys['arrowup']) && game.players[0].grounded) \{ jumpPlayer(0); playSound(800, 100); \}\
+            // Physics all\
+            [...game.players, ...game.bots].forEach((p, i) => \{\
+                p.vy += 0.8; p.y += p.vy;\
+                if (p.y > 450) \{ p.y = 450; p.vy = 0; p.grounded = true; \}\
+                p.x += 4 + game.level * 0.5;\
+                if (i >= game.players.length) aiBot(i - game.players.length); // Bots\
+            \});\
+            // Obstacles\
+            if (Math.random() < 0.03) game.obstacles.push(\{x: canvas.width, type: ['spike','gap','wall'][Math.floor(Math.random()*3)]\});\
+            game.obstacles.forEach(o => o.x -= 5); game.obstacles = game.obstacles.filter(o => o.x > -50);\
+            // Collisions\
+            [...game.players, ...game.bots].forEach(p => \{\
+                game.obstacles.forEach(o => \{\
+                    if (p.x > o.x - 40 && p.x < o.x + 40 && p.y > 430) \{\
+                        p.x = -100; // Elimina\
+                    \}\
+                \});\
+            \});\
+            // Remate trigger (first to reach)\
+            const leaders = [...game.players, ...game.bots].filter(p => p.x > 350);\
+            if (leaders.length > 0 && !game.remateActive) \{\
+                game.remateActive = true;\
+                leaders.forEach(p => p.rank = leaders.findIndex(l => l === p) + 1);\
+                game.players[0].rank = game.players[0].rank || 99; // Player rank\
+            \}\
+            if (game.players[0].x < 0) \{ alert('\'a1Eliminado!'); backHub(); \}\
+            if (game.score > 300) game.level++;\
+        \}\
+\
+        function draw() \{\
+            ctx.clearRect(0,0,canvas.width,canvas.height);\
+            // Ground\
+            ctx.fillStyle = '#228B22'; ctx.fillRect(0,470,canvas.width,230);\
+            // Obstacles\
+            game.obstacles.forEach(o => \{\
+                ctx.fillStyle = o.type === 'spike' ? '#8B4513' : o.type === 'gap' ? 'transparent' : '#654321';\
+                ctx.fillRect(o.x, o.type === 'gap' ? 500 : 440, 40, o.type === 'gap' ? -30 : 40);\
+            \});\
+            // Players/Bots (huevos futboleros)\
+            [...game.players, ...game.bots].forEach(p => \{\
+                if (p.x > -50) \{\
+                    ctx.fillStyle = p.color; ctx.beginPath(); ctx.arc(p.x, p.y-20, 25, 0, Math.PI*2); ctx.fill(); // Cuerpo\
+                    ctx.fillStyle = '#000'; ctx.font = '12px Arial'; ctx.fillText(p.rank || '', p.x-5, p.y-25); // Rank\
+                    // Bal\'f3n dribble\
+                    ctx.save(); ctx.translate(p.x, p.y+10); ctx.rotate(Date.now()/500 + p.x/100); ctx.fillStyle='#FFF'; ctx.beginPath(); ctx.arc(0,0,8,0,Math.PI*2); ctx.fill(); ctx.strokeStyle='#000'; ctx.lineWidth=2; ctx.stroke(); ctx.restore();\
+                \}\
+            \});\
+            // Porter\'eda + Portero\
+            ctx.strokeStyle = '#FFF'; ctx.lineWidth=6; ctx.strokeRect(360,360,70,110);\
+            ctx.fillStyle = '#00F'; ctx.fillRect(game.goalieX + Math.sin(Date.now()/200)*10, 400, 25, 70); // Mueve\
+            // Remate UI\
+            if (game.remateActive) \{\
+                ctx.fillStyle = 'rgba(255,255,0,0.8)'; ctx.font = 'bold 24px Arial'; ctx.fillText('\'a1REMATA! Swipe/Drag', 100, 200);\
+                if (game.players[0].rank === 1) ctx.fillText('\'a1PRIMER LUGAR!', 120, 250);\
+            \}\
+            // HUD\
+            ctx.fillStyle = '#000'; ctx.font = 'bold 22px Arial';\
+            ctx.fillText(`Nivel $\{game.level\} | $$\{game.score\}`, 20, 40);\
+            ctx.fillText(`Bots: $\{game.bots.length\} | Rank: $\{game.players[0].rank || '?' \}`, 20, 70);\
+        \}\
+\
+        function gameLoop() \{\
+            update(); draw(); requestAnimationFrame(gameLoop);\
+        \}\
+\
+        function backHub() \{\
+            document.getElementById('ui').style.display = 'block';\
+            document.getElementById('hub').style.display = 'block';\
+            updateUI(); resetGame(0); state = 'hub';\
+        \}\
+\
+        gameLoop();\
+    </script>\
+</body>\
+</html>}
